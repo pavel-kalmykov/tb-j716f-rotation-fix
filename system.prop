@@ -1,0 +1,7 @@
+# Boot animation and initial display rotation (A14 QPR2+ reads _logical_0,
+# A14 QPR1 and A13 read the physical display ID variant).
+ro.bootanim.set_orientation_logical_0=ORIENTATION_90
+ro.bootanim.set_orientation_4630946751485739649=ORIENTATION_90
+
+# Allow lock screen rotation (read by AOSP KeyguardStateController).
+lockscreen.rot_override=true

@@ -1,0 +1,44 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build flashable zip
+        run: |
+          zip -r tb-j716f-rotation-fix-${{ github.ref_name }}.zip \
+            META-INF/ \
+            module.prop \
+            system.prop \
+            system/
+
+      - name: Extract changelog for this version
+        id: changelog
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          # Extract the section for this version from CHANGELOG.md
+          body=$(awk "/^## v${version}/{found=1; next} /^## v/{if(found) exit} found{print}" CHANGELOG.md)
+          if [ -z "$body" ]; then
+            body="Release ${GITHUB_REF_NAME}"
+          fi
+          {
+            echo "body<<CHANGELOG_EOF"
+            echo "$body"
+            echo "CHANGELOG_EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: tb-j716f-rotation-fix-${{ github.ref_name }}.zip
+          body: ${{ steps.changelog.outputs.body }}

@@ -1,0 +1,7 @@
+id=tb-j716f-rotation-fix
+name=Tablet Landscape Boot & Rotation Fix
+version=v0.1.0
+versionCode=1
+author=pavel.kalmykov
+description=Fixes portrait boot animation, lock screen rotation and default orientation on landscape-panel tablets with installOrientation (e.g. 270 deg physical rotation). Compatible with Android 13-16 on TrebleDroid-based GSIs.
+updateJson=https://raw.githubusercontent.com/pavel-kalmykov/tb-j716f-rotation-fix/main/update.json
