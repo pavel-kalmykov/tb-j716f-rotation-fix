@@ -1,6 +1,6 @@
 # TB-J716F Rotation Fix
 
-Magisk module for the Lenovo Xiaoxin Pad Pro 2021 (TB-J716F). Fixes the broken screen orientation that shows up when you run a TrebleDroid GSI on this tablet.
+Magisk module for the Lenovo Xiaoxin Pad Pro 2021 (TB-J716F) that fixes the broken screen orientation you get when running a TrebleDroid GSI on this tablet.
 
 ## What's the problem?
 
@@ -14,11 +14,11 @@ The TB-J716F has a landscape panel (2560x1600) physically mounted at 270 degrees
 
 Three things:
 
-1. **Boot animation orientation.** Sets `ro.bootanim.set_orientation` for both the logical display ID (Android 14 QPR2+) and the physical display ID (Android 13/14 QPR1), so the animation renders correctly across versions.
+1. **Boot animation orientation.** The module sets `ro.bootanim.set_orientation` for both the logical display ID (Android 14 QPR2+) and the physical display ID (Android 13/14 QPR1), so the animation renders correctly across versions.
 
-2. **Lock screen rotation.** Enables `lockscreen.rot_override=true`, which tells AOSP's KeyguardStateController to actually respect the accelerometer on the lock screen.
+2. **Lock screen rotation.** It enables `lockscreen.rot_override=true`, which tells AOSP's KeyguardStateController to actually respect the accelerometer on the lock screen.
 
-3. **Rotation mapping and defaults.** Installs two RRO overlays from TrebleDroid that correct the rotation direction and set sane default orientation values.
+3. **Rotation mapping and defaults.** It installs two RRO overlays from TrebleDroid that correct the rotation direction and set sane default orientation values.
 
 ## Compatibility
 
@@ -29,7 +29,7 @@ Three things:
 | **Android** | 13, 14, 15, 16 |
 | **Root** | Magisk 20.4+ |
 
-Other landscape tablets with `installOrientation` might benefit too, but the display ID property in `system.prop` is specific to this device.
+Other landscape tablets with `installOrientation` might benefit too (the overlay APKs are generic), but the display ID property in `system.prop` is specific to this device.
 
 ## Installation
 
@@ -49,7 +49,7 @@ system/product/overlay/
   treble-overlay-tablet-settings-defaults.apk   Default orientation (from TrebleDroid)
 ```
 
-No scripts, no SELinux patches, no background services. Just properties and overlays.
+Just properties and overlays, no scripts or SELinux patches involved.
 
 ## Credits
 
